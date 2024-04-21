@@ -17,6 +17,11 @@ public class CoursesController(ApiContext context) : ControllerBase
             .Include(c => c.Authors)
             .ToListAsync();
 
+        if (courses == null || !courses.Any())
+        {
+            return NoContent();
+        }
+
         var result = courses.Select(c => new
         {
             Id = c.Id,
@@ -37,6 +42,7 @@ public class CoursesController(ApiContext context) : ControllerBase
 
         return Ok(result);
     }
+
 
 
 
